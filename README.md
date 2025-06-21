@@ -1,6 +1,6 @@
 # 📚 HUSC ResearchHub
 
-**HUSC ResearchHub** là hệ thống web hỗ trợ đăng ký, quản lý và theo dõi các đề tài nghiên cứu khoa học trong sinh viên tại Khoa Công nghệ Thông tin – Trường Đại học Khoa học, Đại học Huế. ALLLLLLLLLLLLooooooo
+**HUSC ResearchHub** là hệ thống web hỗ trợ đăng ký, quản lý và theo dõi các đề tài nghiên cứu khoa học trong sinh viên tại Khoa Công nghệ Thông tin – Trường Đại học Khoa học, Đại học Huế.
 
 ---
 
