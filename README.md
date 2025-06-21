@@ -47,7 +47,22 @@
 ---
 
 ## 📂 Cấu trúc thư mục Documents
-
+HUSC_ResearchHub-Documents
+├── Biểu mẫu, thông báo
+├── Draw.io
+├── Kịch bản họp
+├── Obsidian
+│   ├── Attachments
+│   ├── Extra
+│   └── Notes
+│       ├── Lộ trình
+│       │   └── Quy trình phát triển
+│       └── Members
+├── Tài liệu học tập
+│   └── Roadmap.sh
+└── Tệp sql, mwb
+    └── HUSC ReasearchHub - 21d06M2025y 00h28
+    
 ## 📂 Cấu trúc thư mục Backend
 
 ## 📂 Cấu trúc thư mục Frontend
