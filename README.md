@@ -47,6 +47,7 @@
 ---
 
 ## 📂 Cấu trúc thư mục Documents
+```
 HUSC_ResearchHub-Documents
 ├── Biểu mẫu, thông báo
 ├── Draw.io
@@ -62,7 +63,8 @@ HUSC_ResearchHub-Documents
 │   └── Roadmap.sh
 └── Tệp sql, mwb
     └── HUSC ReasearchHub - 21d06M2025y 00h28
-    
+```
+
 ## 📂 Cấu trúc thư mục Backend
 
 ## 📂 Cấu trúc thư mục Frontend
