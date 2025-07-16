@@ -46,39 +46,6 @@
 
 ---
 
-## 📂 Cấu trúc thư mục Documents
-```
-HUSC_ResearchHub-Documents
-├── Biểu mẫu, thông báo
-├── Draw.io
-├── Kịch bản họp
-├── Obsidian
-│   ├── Attachments
-│   ├── Extra
-│   └── Notes
-│       ├── Lộ trình
-│       │   └── Quy trình phát triển
-│       └── Members
-├── Tài liệu học tập
-│   └── Roadmap.sh
-└── Tệp sql, mwb
-    └── HUSC ReasearchHub - 21d06M2025y 00h28
-```
-
-## 📂 Cấu trúc thư mục Backend
-
-## 📂 Cấu trúc thư mục Frontend
-
-## 📎 Tài liệu liên quan
-
-- Mô hình dữ liệu [`Draw.io`](https://github.com/TruongPersonal/HUSC_ResearchHub-Documents/tree/main/Draw.io)
-- Tệp truy vấn, cơ sở dữ liệu [`Tệp sql, mwb`](https://github.com/TruongPersonal/HUSC_ResearchHub-Documents/tree/main/Tệp%20sql%2C%20mwb)
-- Kịch bản họp nhóm, nội dung phân công [`Kịch bản họp`](https://github.com/TruongPersonal/HUSC_ResearchHub-Documents/tree/main/Kịch%20bản%20h%E1%BB%8Dp)
-- Đặc tả phần mềm [`Đặc tả`](https://github.com/TruongPersonal/HUSC_ResearchHub-Documents/blob/main/Đặc%20tả.xlsx)
-- Notes thiết kế, lộ trình phát triển [`Obsidian`](https://github.com/TruongPersonal/HUSC_ResearchHub-Documents/tree/main/Obsidian)
-
----
-
 ## 💡 Ghi chú
 
 - Mọi đóng góp và phản hồi có thể thực hiện thông qua GitHub.
