@@ -39,10 +39,10 @@
 
 ## 🧑‍💻 Thành viên nhóm
 
-- [Hồ Thị Quỳnh Uyên](https://github.com/Ury25)
-- [Nguyễn Ngọc Tố Linh](https://github.com/turtle3ds)
-- [Nguyễn Đình Nhật Huy](https://github.com/nhathuynguyen19)
-- [Ngô Quang Trường](https://github.com/TruongPersonal)
+- [Ngô Quang Trường](https://github.com/TruongPersonal) (Chủ nhiệm)
+- [Nguyễn Ngọc Tố Linh](https://github.com/turtle3ds) (Thành viên)
+- [Nguyễn Đình Nhật Huy](https://github.com/nhathuynguyen19) (Thành viên/Quan sát viên)
+- [Hồ Thị Quỳnh Uyên](https://github.com/Ury25) (Quan sát viên)
 
 ---
 
