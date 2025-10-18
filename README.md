@@ -11,14 +11,12 @@
 - Hỗ trợ sinh viên đăng ký, tạo nhóm, khai báo giảng viên hướng dẫn.
 - Đơn giản hóa quá trình xét duyệt và lưu trữ hồ sơ.
 
-### ⚙️ Phiên bản ngôn ngữ & công nghệ
-| Công nghệ       | Phiên bản    |
-|------------------|--------------|
-| Node.js          | `v22.16.0`   |
-| Java             | `v21.0.5`    |
-| Spring Boot      | `v3.2.5`     |
-| Maven            | `v3.9.9`     |
-| MySQL            | `v8.0.42`    |
+## ⚙️ Công nghệ & Phiên bản
+| Thành phần   | Phiên bản |
+|---------------|------------|
+| Frontend      | Next.js 15 · Node.js 22.16 |
+| Backend       | Java 21 · Spring Boot 3.2.5 · Maven 3.9.9 |
+| Database      | MySQL 8.0.42 
 
 ---
 
@@ -34,6 +32,6 @@
 ## 💡 Ghi chú
 
 - Dự án này mang tính học thuật, phục vụ việc Nghiên cứu Khoa học tại HUSC.
-- Chúng em cảm ơn thầy TS. Nguyễn Văn Trung - Khoa CNTT, HUSC rất nhiều vì đã giúp đỡ bọn em trong suốt quá trình hoàn thành bài nghiên cứu!
+- Chúng em cảm ơn thầy TS. Nguyễn Văn Trung - CNTT, HUSC rất nhiều vì đã giúp đỡ bọn em trong suốt quá trình hoàn thành bài nghiên cứu!
 
 ---
