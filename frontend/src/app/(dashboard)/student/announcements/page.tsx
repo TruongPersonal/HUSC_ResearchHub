@@ -1,0 +1,1 @@
+export { default } from "@/app/(dashboard)/accounts/announcements/page";
