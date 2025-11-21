@@ -6,7 +6,7 @@
 
 ## 🚀 Mục tiêu dự án
 
-- Quản lý các vai trò: Quản trị viên, Giảng viên, Sinh viên.
+- Quản lý các vai trò: Quản trị, Trợ lý khoa Giảng viên, Sinh viên.
 - Tạo, xét duyệt và theo dõi tiến độ đề tài nghiên cứu.
 - Hỗ trợ sinh viên đăng ký, tạo nhóm, khai báo giảng viên hướng dẫn.
 - Đơn giản hóa quá trình xét duyệt và lưu trữ hồ sơ.
