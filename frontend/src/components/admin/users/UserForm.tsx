@@ -241,7 +241,7 @@ export function UserForm({
               />
             </div>
             <DialogFooter>
-              <Button type="submit">Lưu</Button>
+              <Button type="submit">Lưu thay đổi</Button>
             </DialogFooter>
           </form>
         </Form>

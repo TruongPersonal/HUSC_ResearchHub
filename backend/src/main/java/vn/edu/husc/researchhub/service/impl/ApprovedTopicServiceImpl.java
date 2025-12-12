@@ -71,7 +71,13 @@ public class ApprovedTopicServiceImpl implements ApprovedTopicService {
             .findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy đề tài đã duyệt"));
 
-    if (request.getCode() != null) approvedTopic.setCode(request.getCode());
+    if (request.getCode() != null) {
+      if (!request.getCode().equals(approvedTopic.getCode())
+          && approvedTopicRepository.existsByCodeAndIdNot(request.getCode(), id)) {
+        throw new RuntimeException("Mã đề tài đã tồn tại: " + request.getCode());
+      }
+      approvedTopic.setCode(request.getCode());
+    }
     if (request.getPrize() != null) approvedTopic.setPrize(request.getPrize());
     if (request.getFieldResearch() != null)
       approvedTopic.setFieldResearch(request.getFieldResearch());

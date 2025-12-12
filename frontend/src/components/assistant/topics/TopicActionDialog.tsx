@@ -145,9 +145,9 @@ export function TopicActionDialog({
 
       toast.success("Cập nhật đề tài thành công");
       onSuccess();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      toast.error("Có lỗi xảy ra khi cập nhật");
+      toast.error(error?.response?.data?.message || "Có lỗi xảy ra khi cập nhật");
     }
   };
 
@@ -179,9 +179,9 @@ export function TopicActionDialog({
       await topicService.updateStatus(topic.id, "REJECTED", rejectReason);
       toast.error("Đã từ chối đề tài");
       onSuccess();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      toast.error("Có lỗi xảy ra khi từ chối đề tài");
+      toast.error(error?.response?.data?.message || "Có lỗi xảy ra khi từ chối đề tài");
     }
   };
 

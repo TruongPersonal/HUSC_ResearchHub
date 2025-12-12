@@ -75,9 +75,9 @@ export function ApprovedTopicActionDialog({
       toast.success("Cập nhật đề tài thành công");
       onSuccess();
       onOpenChange(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      toast.error("Có lỗi xảy ra khi cập nhật");
+      toast.error(error?.response?.data?.message || "Có lỗi xảy ra khi cập nhật");
     }
   };
 
@@ -90,9 +90,9 @@ export function ApprovedTopicActionDialog({
       toast.success("Đã huỷ đề tài");
       onSuccess();
       onOpenChange(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      toast.error("Có lỗi xảy ra khi huỷ đề tài");
+      toast.error(error?.response?.data?.message || "Có lỗi xảy ra khi huỷ đề tài");
     }
   };
 
@@ -111,9 +111,9 @@ export function ApprovedTopicActionDialog({
       toast.success("Đã đánh dấu hoàn thành đề tài");
       onSuccess();
       onOpenChange(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      toast.error("Có lỗi xảy ra khi cập nhật trạng thái");
+      toast.error(error?.response?.data?.message || "Có lỗi xảy ra khi cập nhật trạng thái");
     }
   };
 

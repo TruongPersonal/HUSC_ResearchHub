@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Textarea } from "../../../components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avatar";
 import { toast } from "sonner";
-import { useDebounce } from "../../../hooks/use-debounce";
+import { useDebounce } from "../../../hooks/useDebounce";
 import { cn } from "../../../lib/utils";
 import { Pagination } from "../../../components/ui/pagination";
 import {

@@ -10,6 +10,10 @@ import vn.edu.husc.researchhub.model.ApprovedTopic;
 public interface ApprovedTopicRepository extends JpaRepository<ApprovedTopic, Integer> {
   boolean existsByTopicId(Integer topicId);
 
+  boolean existsByCode(String code);
+
+  boolean existsByCodeAndIdNot(String code, Integer id);
+
   java.util.Optional<ApprovedTopic> findByTopicId(Integer topicId);
 
   long countByTopicDepartmentIdAndTopicAcademicYearId(Integer departmentId, Integer academicYearId);

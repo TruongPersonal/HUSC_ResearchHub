@@ -88,8 +88,8 @@ public class TopicServiceImpl implements TopicService {
     topicRepository.save(topic);
 
     // Create ApprovedTopic if status is APPROVED and it doesn't exist
-    // Validation: When Approving a Topic
-    if (status == TopicStatus.APPROVED) {
+    // Validation: When Approving or Rejecting a Topic
+    if (status == TopicStatus.APPROVED || status == TopicStatus.REJECTED) {
       List<TopicMember> allMembers = topicMemberRepository.findByTopicId(id);
 
       // 1. Check if all members are processed
@@ -97,38 +97,40 @@ public class TopicServiceImpl implements TopicService {
           allMembers.stream().anyMatch(m -> m.getStatus() == MemberStatus.PENDING);
       if (hasPendingMembers) {
         throw new RuntimeException(
-            "Không thể duyệt đề tài vì còn thành viên chưa được Duyệt hoặc Từ chối.");
+            "Không thể duyệt hoặc từ chối đề tài vì còn thành viên chưa được Duyệt hoặc Từ chối.");
       }
 
-      // 2. Check for Leader
-      boolean hasLeader =
-          allMembers.stream()
-              .anyMatch(
-                  m ->
-                      m.getRole() == TopicMemberRole.LEADER
-                          && m.getStatus() == MemberStatus.APPROVED);
-      if (!hasLeader) {
-        throw new RuntimeException("Đề tài phải có Sinh viên chủ nhiệm.");
-      }
+      if (status == TopicStatus.APPROVED) {
+        // 2. Check for Leader
+        boolean hasLeader =
+            allMembers.stream()
+                .anyMatch(
+                    m ->
+                        m.getRole() == TopicMemberRole.LEADER
+                            && m.getStatus() == MemberStatus.APPROVED);
+        if (!hasLeader) {
+          throw new RuntimeException("Đề tài phải có Sinh viên chủ nhiệm.");
+        }
 
-      // 3. Check for Advisor
-      boolean hasAdvisor =
-          allMembers.stream()
-              .anyMatch(
-                  m ->
-                      m.getRole() == TopicMemberRole.ADVISOR
-                          && m.getStatus() == MemberStatus.APPROVED);
-      if (!hasAdvisor) {
-        throw new RuntimeException("Đề tài phải có Giảng viên hướng dẫn.");
-      }
+        // 3. Check for Advisor
+        boolean hasAdvisor =
+            allMembers.stream()
+                .anyMatch(
+                    m ->
+                        m.getRole() == TopicMemberRole.ADVISOR
+                            && m.getStatus() == MemberStatus.APPROVED);
+        if (!hasAdvisor) {
+          throw new RuntimeException("Đề tài phải có Giảng viên hướng dẫn.");
+        }
 
-      if (!approvedTopicRepository.existsByTopicId(id)) {
-        vn.edu.husc.researchhub.model.ApprovedTopic approvedTopic =
-            new vn.edu.husc.researchhub.model.ApprovedTopic();
-        approvedTopic.setTopic(topic);
-        approvedTopic.setStatus(
-            vn.edu.husc.researchhub.model.enums.ApprovedTopicStatus.IN_PROGRESS);
-        approvedTopicRepository.save(approvedTopic);
+        if (!approvedTopicRepository.existsByTopicId(id)) {
+          vn.edu.husc.researchhub.model.ApprovedTopic approvedTopic =
+              new vn.edu.husc.researchhub.model.ApprovedTopic();
+          approvedTopic.setTopic(topic);
+          approvedTopic.setStatus(
+              vn.edu.husc.researchhub.model.enums.ApprovedTopicStatus.IN_PROGRESS);
+          approvedTopicRepository.save(approvedTopic);
+        }
       }
     }
   }

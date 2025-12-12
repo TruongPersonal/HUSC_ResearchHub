@@ -84,9 +84,9 @@ export function ApprovedTopicDetailDialog({
       toast.success("Cập nhật thông tin thành công");
       onSave?.();
       setEditMode(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Failed to update topic", error);
-      toast.error("Có lỗi xảy ra khi cập nhật");
+      toast.error(error?.response?.data?.message || "Có lỗi xảy ra khi cập nhật");
     } finally {
       setIsSaving(false);
     }
