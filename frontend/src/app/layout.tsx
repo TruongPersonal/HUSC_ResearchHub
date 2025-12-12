@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -11,10 +11,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "HUSC ResearchHub",
-  description: "Hệ thống hỗ trợ quản lý đăng ký đề tài nghiên cứu khoa học tại trường Đại học Khoa học, Đại học Huế",
+  description:
+    "Hệ thống hỗ trợ quản lý đăng ký đề tài nghiên cứu khoa học tại trường Đại học Khoa học, Đại học Huế",
 };
 
-
+/**
+ * Root Layout của ứng dụng.
+ * Cấu hình font chữ, metadata toàn cục và các provider (Toaster).
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,9 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <body
-        className={`${inter.variable} antialiased`}
-      >
+      <body className={`${inter.variable} antialiased`}>
         {children}
         <Toaster />
       </body>

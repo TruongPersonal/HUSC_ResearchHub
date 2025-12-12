@@ -12,21 +12,21 @@ import vn.edu.husc.researchhub.model.enums.YearSessionStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 public class YearSession {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "academic_year_id", nullable = false)
-    private AcademicYear academicYear;
+  @ManyToOne
+  @JoinColumn(name = "academic_year_id", nullable = false)
+  private AcademicYear academicYear;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id", nullable = false)
-    private Department department;
+  @ManyToOne
+  @JoinColumn(name = "department_id", nullable = false)
+  private Department department;
 
-    @Column(nullable = false)
-    private Integer year;
+  @Column(nullable = false)
+  private Integer year;
 
-    @Enumerated(EnumType.STRING)
-    private YearSessionStatus status;
+  @Enumerated(EnumType.STRING)
+  private YearSessionStatus status;
 }

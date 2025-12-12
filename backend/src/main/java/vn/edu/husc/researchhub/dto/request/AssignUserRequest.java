@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class AssignUserRequest {
-    private Integer userId;
+  private Integer userId;
 }

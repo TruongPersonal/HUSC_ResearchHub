@@ -26,13 +26,15 @@ public class Message {
     @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @Column(name = "is_read")
-    private Boolean isRead;
-
+    @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
+
+    @Column(name = "is_read")
+    private Boolean isRead = false;
+
+
 }

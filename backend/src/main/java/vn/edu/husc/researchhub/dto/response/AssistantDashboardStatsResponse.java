@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AssistantDashboardStatsResponse {
-    private long registrationCount;
-    private long approvedTopicCount;
-    private String currentYear;
-    private String academicYearStatus;
+  private long registrationCount;
+  private long approvedTopicCount;
+  private String currentYear;
+  private String academicYearStatus;
 }

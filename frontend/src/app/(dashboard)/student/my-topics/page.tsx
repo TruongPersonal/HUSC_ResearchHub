@@ -12,151 +12,188 @@ import { topicService } from "@/features/topics/api/topic.service";
 import { TopicRow } from "@/features/topics/types";
 import { authService } from "@/features/auth/api/auth.service";
 
+/**
+ * Trang "Đề tài của tôi" dành cho Sinh viên.
+ * Hiển thị danh sách các Hồ sơ đăng ký (Proposals) và Đề tài nghiên cứu chính thức (Topics) mà sinh viên tham gia.
+ */
 export default function StudentMyTopicsPage() {
-    const router = useRouter();
-    const [data, setData] = useState<MyTopic[]>([]);
-    const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const [data, setData] = useState<MyTopic[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    const [currentUserId, setCurrentUserId] = useState<number | null>(null);
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                // 1. Get Profile for ID
-                const user = await authService.getProfile();
-                setCurrentUserId(user.id); // Assuming Profile has ID. If not, needs checking.
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // 1. Get Profile for ID
+        const user = await authService.getProfile();
+        setCurrentUserId(user.id); // Assuming Profile has ID. If not, needs checking.
 
-                // 2. Get Topics
-                const response = await topicService.getMyTopics();
+        // 2. Get Topics
+        const response = await topicService.getMyTopics();
 
-                // Map API response to UI model
-                const mappedData = response.map((item: TopicRow): MyTopic | null => {
-                    const isLeader = item.studentLeaderId === user.id;
-                    const isPending = item.pendingMembers?.some(m => m.id === user.id);
-                    const isApprovedMember = item.approvedMembers?.some(m => m.id === user.id);
+        // Map API response to UI model
+        const mappedData = response
+          .map((item: TopicRow): MyTopic | null => {
+            const isLeader = item.studentLeaderId === user.id;
+            const isPending = item.pendingMembers?.some(
+              (m) => m.id === user.id,
+            );
+            const isApprovedMember = item.approvedMembers?.some(
+              (m) => m.id === user.id,
+            );
 
-                    // If user is not Leader AND not Approved Member => Filter out.
-                    // (Hides Rejected, Cancelled, AND Pending as requested)
-                    if (!isLeader && !isApprovedMember) {
-                        return null;
-                    }
-
-                    let role: "LEADER" | "MEMBER" | "PENDING" = "MEMBER";
-                    if (isLeader) role = "LEADER";
-                    if (isPending) role = "PENDING";
-
-                    return {
-                        id: item.id.toString(),
-                        code: item.code,
-                        name: item.title,
-                        status: (item.approvedStatus || item.status) as any,
-                        createdAt: new Date(item.submittedAt).toLocaleDateString('vi-VN'),
-                        type: item.status === "APPROVED" ? "TOPIC" : "PROPOSAL",
-                        role: (item.studentLeaderId === user.id) ? "LEADER" : (item.advisorId === user.id ? "ADVISOR" : "MEMBER"),
-                        budget: parseFloat(item.budget || "0"),
-                        lecturer: {
-                            name: item.advisor || "Chưa có giảng viên",
-                            username: ""
-                        },
-                        students: item.approvedMembers ? item.approvedMembers.map(m => ({
-                            id: m.id.toString(),
-                            code: m.username || "",
-                            name: m.name,
-                            isLeader: item.studentLeaderId === m.id
-                        })) : []
-                    };
-                }).filter((item): item is MyTopic => item !== null);
-
-                setData(mappedData);
-            } catch (error) {
-                console.error("Failed to fetch data", error);
-            } finally {
-                setLoading(false);
+            // If user is not Leader AND not Approved Member => Filter out.
+            // (Hides Rejected, Cancelled, AND Pending as requested)
+            if (!isLeader && !isApprovedMember) {
+              return null;
             }
-        };
 
-        fetchData();
-    }, []);
+            let role: "LEADER" | "MEMBER" | "PENDING" = "MEMBER";
+            if (isLeader) role = "LEADER";
+            if (isPending) role = "PENDING";
 
+            return {
+              id: item.id.toString(),
+              code: item.code,
+              name: item.title,
+              status: (item.approvedStatus || item.status) as any,
+              createdAt: new Date(item.submittedAt).toLocaleDateString("vi-VN"),
+              type: item.status === "APPROVED" ? "TOPIC" : "PROPOSAL",
+              role:
+                item.studentLeaderId === user.id
+                  ? "LEADER"
+                  : item.advisorId === user.id
+                    ? "ADVISOR"
+                    : "MEMBER",
+              budget: parseFloat(item.budget || "0"),
+              lecturer: {
+                name: item.advisor || "Chưa có giảng viên",
+                username: "",
+                avatar: item.advisorAvatar,
+              },
+              students: item.approvedMembers
+                ? item.approvedMembers.map((m) => ({
+                  id: m.id.toString(),
+                  code: m.username || "",
+                  name: m.name,
+                  isLeader: item.studentLeaderId === m.id,
+                  avatar: m.avatar,
+                }))
+                : [],
+            };
+          })
+          .filter((item): item is MyTopic => item !== null);
 
-    // Proposals: Show ALL topics.
-    // If a topic is officially active (IN_PROGRESS, etc.), show it as "APPROVED" in the Proposal list.
-    const proposals = data.map(item => {
-        const isOfficialStatus = ["IN_PROGRESS", "COMPLETED", "NOT_COMPLETED", "CANCELED"].includes(item.status);
-        if (isOfficialStatus) {
-            return { ...item, status: "APPROVED" as any };
-        }
-        return item;
-    });
+        setData(mappedData);
+      } catch (error) {
+        console.error("Failed to fetch data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // Official Topics: Only show those that are actually Approved/Active.
-    const topics = data.filter(item => {
-        return ["APPROVED", "IN_PROGRESS", "COMPLETED", "NOT_COMPLETED", "CANCELED"].includes(item.status);
-    });
+    fetchData();
+  }, []);
 
+  // Proposals: Show ALL topics.
+  // If a topic is officially active (IN_PROGRESS, etc.), show it as "APPROVED" in the Proposal list.
+  const proposals = data.map((item) => {
+    const isOfficialStatus = [
+      "IN_PROGRESS",
+      "COMPLETED",
+      "NOT_COMPLETED",
+      "CANCELED",
+    ].includes(item.status);
+    if (isOfficialStatus) {
+      return { ...item, status: "APPROVED" as any };
+    }
+    return item;
+  });
 
+  // Official Topics: Only show those that are actually Approved/Active.
+  const topics = data.filter((item) => {
+    return [
+      "APPROVED",
+      "IN_PROGRESS",
+      "COMPLETED",
+      "NOT_COMPLETED",
+      "CANCELED",
+    ].includes(item.status);
+  });
 
-
-
-    return (
-        <div className="max-w-[1080px] mx-auto pb-12">
-            {/* Header */}
-            <div className="mb-8 flex items-end justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Đề tài của tôi</h1>
-                    <p className="text-gray-500 mt-1">Hồ sơ đăng ký và danh sách đề tài.</p>
-                </div>
-                <Link href="/student/topic-propose">
-                    <Button className="bg-blue-600 hover:bg-blue-700 shadow-sm transition-all">
-                        <Plus className="w-4 h-4 mr-2" />
-                        Đề xuất đề tài mới
-                    </Button>
-                </Link>
-            </div>
-
-            {/* Main Content */}
-            <Tabs defaultValue="proposals" className="space-y-6">
-                <TabsList className="bg-gray-100/50 p-1 rounded-lg inline-flex h-auto border border-gray-200/50">
-                    <TabsTrigger
-                        value="proposals"
-                        className="px-4 py-2 rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm font-medium transition-all gap-2 text-sm"
-                    >
-                        <FileText className="w-4 h-4" />
-                        Hồ sơ đăng ký
-                        <span className="ml-1.5 bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full text-xs">
-                            {proposals.length}
-                        </span>
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="topics"
-                        className="px-4 py-2 rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm font-medium transition-all gap-2 text-sm"
-                    >
-                        <BookOpen className="w-4 h-4" />
-                        Danh sách đề tài
-                        <span className="ml-1.5 bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full text-xs">
-                            {topics.length}
-                        </span>
-                    </TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="proposals" className="space-y-6 animate-in fade-in-50 duration-300 slide-in-from-bottom-2">
-                    <MyTopicsTable
-                        data={proposals}
-                        onView={(topic) => router.push(`/student/my-topics/${topic.id}?view=proposal`)}
-                        emptyMessage="Bạn chưa có hồ sơ đăng ký nào."
-                        showCode={false}
-                    />
-                </TabsContent>
-
-                <TabsContent value="topics" className="space-y-6 animate-in fade-in-50 duration-300 slide-in-from-bottom-2">
-                    <MyTopicsTable
-                        data={topics}
-                        onView={(topic) => router.push(`/student/my-topics/${topic.id}?view=topic`)}
-                        emptyMessage="Bạn chưa có đề tài nghiên cứu nào."
-                    />
-                </TabsContent>
-            </Tabs>
+  return (
+    <div className="max-w-[1080px] mx-auto pb-12">
+      {/* Header */}
+      <div className="mb-8 flex items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Đề tài của tôi</h1>
+          <p className="text-gray-500 mt-1">
+            Hồ sơ đăng ký và danh sách đề tài.
+          </p>
         </div>
-    );
+        <Link href="/student/topic-propose">
+          <Button className="bg-blue-600 hover:bg-blue-700 shadow-sm transition-all">
+            <Plus className="w-4 h-4 mr-2" />
+            Đề xuất đề tài mới
+          </Button>
+        </Link>
+      </div>
+
+      {/* Main Content */}
+      <Tabs defaultValue="proposals" className="space-y-6">
+        <TabsList className="bg-gray-100/50 p-1 rounded-lg inline-flex h-auto border border-gray-200/50">
+          <TabsTrigger
+            value="proposals"
+            className="px-4 py-2 rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm font-medium transition-all gap-2 text-sm"
+          >
+            <FileText className="w-4 h-4" />
+            Hồ sơ đăng ký
+            <span className="ml-1.5 bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full text-xs">
+              {proposals.length}
+            </span>
+          </TabsTrigger>
+          <TabsTrigger
+            value="topics"
+            className="px-4 py-2 rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm font-medium transition-all gap-2 text-sm"
+          >
+            <BookOpen className="w-4 h-4" />
+            Danh sách đề tài
+            <span className="ml-1.5 bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full text-xs">
+              {topics.length}
+            </span>
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent
+          value="proposals"
+          className="space-y-6 animate-in fade-in-50 duration-300 slide-in-from-bottom-2"
+        >
+          <MyTopicsTable
+            data={proposals}
+            onView={(topic) =>
+              router.push(`/student/my-topics/${topic.id}?view=proposal`)
+            }
+            emptyMessage="Bạn chưa có hồ sơ đăng ký nào."
+            showCode={false}
+          />
+        </TabsContent>
+
+        <TabsContent
+          value="topics"
+          className="space-y-6 animate-in fade-in-50 duration-300 slide-in-from-bottom-2"
+        >
+          <MyTopicsTable
+            data={topics}
+            onView={(topic) =>
+              router.push(`/student/my-topics/${topic.id}?view=topic`)
+            }
+            emptyMessage="Bạn chưa có đề tài nghiên cứu nào."
+          />
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
 }

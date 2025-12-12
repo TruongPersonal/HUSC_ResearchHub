@@ -14,28 +14,42 @@ import vn.edu.husc.researchhub.service.DepartmentService;
 @RequiredArgsConstructor
 public class DepartmentController {
 
-    private final DepartmentService departmentService;
+  private final DepartmentService departmentService;
 
-    @GetMapping
-    public ResponseEntity<Page<DepartmentResponse>> getAll(
-            @RequestParam(required = false) String keyword,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return ResponseEntity.ok(departmentService.getAll(keyword, page, size));
-    }
+  /**
+   * Lấy danh sách Khoa/Bộ môn.
+   * Hỗ trợ tìm kiếm theo tên.
+   */
+  @GetMapping
+  public ResponseEntity<Page<DepartmentResponse>> getAll(
+      @RequestParam(required = false) String keyword,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size) {
+    return ResponseEntity.ok(departmentService.getAll(keyword, page, size));
+  }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DepartmentResponse> getById(@PathVariable Integer id) {
-        return ResponseEntity.ok(departmentService.getById(id));
-    }
+  /**
+   * Lấy chi tiết Khoa theo ID.
+   */
+  @GetMapping("/{id}")
+  public ResponseEntity<DepartmentResponse> getById(@PathVariable Integer id) {
+    return ResponseEntity.ok(departmentService.getById(id));
+  }
 
-    @PostMapping
-    public ResponseEntity<DepartmentResponse> create(@Valid @RequestBody DepartmentRequest request) {
-        return ResponseEntity.ok(departmentService.create(request));
-    }
+  /**
+   * Tạo Khoa mới.
+   */
+  @PostMapping
+  public ResponseEntity<DepartmentResponse> create(@Valid @RequestBody DepartmentRequest request) {
+    return ResponseEntity.ok(departmentService.create(request));
+  }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<DepartmentResponse> update(@PathVariable Integer id, @Valid @RequestBody DepartmentRequest request) {
-        return ResponseEntity.ok(departmentService.update(id, request));
-    }
+  /**
+   * Cập nhật thông tin Khoa.
+   */
+  @PutMapping("/{id}")
+  public ResponseEntity<DepartmentResponse> update(
+      @PathVariable Integer id, @Valid @RequestBody DepartmentRequest request) {
+    return ResponseEntity.ok(departmentService.update(id, request));
+  }
 }

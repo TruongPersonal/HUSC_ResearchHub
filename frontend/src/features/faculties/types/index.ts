@@ -1,13 +1,13 @@
 export interface Faculty {
-    id: number
-    code: string
-    name: string
-    userCount?: number
+  id: number;
+  code: string;
+  name: string;
+  userCount?: number;
 }
 
 export type CreateFacultyRequest = {
-    code: string
-    name: string
-}
+  code: string;
+  name: string;
+};
 
-export type UpdateFacultyRequest = CreateFacultyRequest
+export type UpdateFacultyRequest = CreateFacultyRequest;

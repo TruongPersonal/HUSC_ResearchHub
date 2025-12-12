@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DashboardStatsResponse {
-    private long users;
-    private long years;
-    private long faculties;
-    private String currentYear;
+  private long users;
+  private long years;
+  private long faculties;
+  private String currentYear;
 }

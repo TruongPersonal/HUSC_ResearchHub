@@ -9,9 +9,9 @@ import vn.edu.husc.researchhub.model.enums.ApprovedTopicStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateApprovedTopicRequest {
-    private String code;
-    private String prize;
-    private String fieldResearch;
-    private String typeResearch;
-    private ApprovedTopicStatus status;
+  private String code;
+  private String prize;
+  private String fieldResearch;
+  private String typeResearch;
+  private ApprovedTopicStatus status;
 }

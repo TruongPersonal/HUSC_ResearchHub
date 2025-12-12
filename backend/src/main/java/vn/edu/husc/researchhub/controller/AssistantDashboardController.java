@@ -14,12 +14,14 @@ import vn.edu.husc.researchhub.service.DashboardService;
 @RequiredArgsConstructor
 public class AssistantDashboardController {
 
-    private final DashboardService dashboardService;
+  private final DashboardService dashboardService;
 
-    @GetMapping("/stats")
-    public ResponseEntity<AssistantDashboardStatsResponse> getStats(
-            @RequestParam Integer departmentId,
-            @RequestParam Integer academicYearId) {
-        return ResponseEntity.ok(dashboardService.getAssistantStats(departmentId, academicYearId));
-    }
+  /**
+   * Lấy số liệu thống kê cho Dashboard của Trợ lý khoa.
+   */
+  @GetMapping("/stats")
+  public ResponseEntity<AssistantDashboardStatsResponse> getStats(
+      @RequestParam Integer departmentId, @RequestParam Integer academicYearId) {
+    return ResponseEntity.ok(dashboardService.getAssistantStats(departmentId, academicYearId));
+  }
 }

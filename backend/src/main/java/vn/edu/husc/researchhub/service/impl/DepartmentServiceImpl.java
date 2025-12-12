@@ -16,57 +16,60 @@ import vn.edu.husc.researchhub.service.DepartmentService;
 @RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private final DepartmentRepository departmentRepository;
-    private final vn.edu.husc.researchhub.repository.UserRepository userRepository;
+  private final DepartmentRepository departmentRepository;
+  private final vn.edu.husc.researchhub.repository.UserRepository userRepository;
 
-    @Override
-    public Page<DepartmentResponse> getAll(String keyword, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
-        Page<Department> departmentPage = departmentRepository.search(keyword, pageable);
-        return departmentPage.map(this::mapToResponse);
+  @Override
+  public Page<DepartmentResponse> getAll(String keyword, int page, int size) {
+    Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+    Page<Department> departmentPage = departmentRepository.search(keyword, pageable);
+    return departmentPage.map(this::mapToResponse);
+  }
+
+  @Override
+  public DepartmentResponse create(DepartmentRequest request) {
+    if (departmentRepository.existsByCode(request.getCode())) {
+      throw new RuntimeException("Mã khoa đã tồn tại: " + request.getCode());
+    }
+    Department department = new Department();
+    department.setCode(request.getCode());
+    department.setName(request.getName());
+    Department saved = departmentRepository.save(department);
+    return mapToResponse(saved);
+  }
+
+  @Override
+  public DepartmentResponse update(Integer id, DepartmentRequest request) {
+    Department department =
+        departmentRepository
+            .findById(id)
+            .orElseThrow(() -> new RuntimeException("Không tìm thấy khoa với ID: " + id));
+
+    if (departmentRepository.existsByCodeAndIdNot(request.getCode(), id)) {
+      throw new RuntimeException("Mã khoa đã tồn tại: " + request.getCode());
     }
 
-    @Override
-    public DepartmentResponse create(DepartmentRequest request) {
-        if (departmentRepository.existsByCode(request.getCode())) {
-            throw new RuntimeException("Mã khoa đã tồn tại: " + request.getCode());
-        }
-        Department department = new Department();
-        department.setCode(request.getCode());
-        department.setName(request.getName());
-        Department saved = departmentRepository.save(department);
-        return mapToResponse(saved);
-    }
+    department.setCode(request.getCode());
+    department.setName(request.getName());
+    Department saved = departmentRepository.save(department);
+    return mapToResponse(saved);
+  }
 
-    @Override
-    public DepartmentResponse update(Integer id, DepartmentRequest request) {
-        Department department = departmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy khoa với ID: " + id));
+  @Override
+  public DepartmentResponse getById(Integer id) {
+    Department department =
+        departmentRepository
+            .findById(id)
+            .orElseThrow(() -> new RuntimeException("Không tìm thấy khoa với ID: " + id));
+    return mapToResponse(department);
+  }
 
-        if (departmentRepository.existsByCodeAndIdNot(request.getCode(), id)) {
-            throw new RuntimeException("Mã khoa đã tồn tại: " + request.getCode());
-        }
-
-        department.setCode(request.getCode());
-        department.setName(request.getName());
-        Department saved = departmentRepository.save(department);
-        return mapToResponse(saved);
-    }
-
-
-    @Override
-    public DepartmentResponse getById(Integer id) {
-        Department department = departmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy khoa với ID: " + id));
-        return mapToResponse(department);
-    }
-
-    private DepartmentResponse mapToResponse(Department department) {
-        DepartmentResponse response = new DepartmentResponse();
-        response.setId(department.getId());
-        response.setCode(department.getCode());
-        response.setName(department.getName());
-        response.setUserCount(userRepository.countByDepartmentId(department.getId()));
-        return response;
-    }
+  private DepartmentResponse mapToResponse(Department department) {
+    DepartmentResponse response = new DepartmentResponse();
+    response.setId(department.getId());
+    response.setCode(department.getCode());
+    response.setName(department.getName());
+    response.setUserCount(userRepository.countByDepartmentId(department.getId()));
+    return response;
+  }
 }

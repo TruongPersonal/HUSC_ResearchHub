@@ -5,10 +5,11 @@ import vn.edu.husc.researchhub.model.enums.YearSessionStatus;
 
 @Data
 public class YearSessionResponse {
-    private Integer id;
-    private Integer year;
-    private String departmentName;
-    private YearSessionStatus status;
-    private Integer departmentId;
-    private Integer academicYearId;
+  private Integer id;
+  private Integer year;
+  private String departmentName;
+  private YearSessionStatus status;
+  private Integer departmentId;
+  private Integer academicYearId;
+  private vn.edu.husc.researchhub.model.enums.AcademicYearStatus academicYearStatus;
 }

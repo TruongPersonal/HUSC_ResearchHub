@@ -13,31 +13,45 @@ import vn.edu.husc.researchhub.service.AcademicYearService;
 @RequiredArgsConstructor
 public class AcademicYearController {
 
-    private final AcademicYearService academicYearService;
+  private final AcademicYearService academicYearService;
 
-    @GetMapping
-    public ResponseEntity<Page<AcademicYearResponse>> getAllAcademicYears(
-            @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) Boolean isActive,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return ResponseEntity.ok(academicYearService.getAllAcademicYears(keyword, isActive, page, size));
-    }
+  /**
+   * Lấy danh sách năm học.
+   * Hỗ trợ lọc theo từ khóa và trạng thái hoạt động.
+   */
+  @GetMapping
+  public ResponseEntity<Page<AcademicYearResponse>> getAllAcademicYears(
+      @RequestParam(required = false) String keyword,
+      @RequestParam(required = false) Boolean isActive,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size) {
+    return ResponseEntity.ok(
+        academicYearService.getAllAcademicYears(keyword, isActive, page, size));
+  }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AcademicYearResponse> getAcademicYearById(@PathVariable Integer id) {
-        return ResponseEntity.ok(academicYearService.getAcademicYearById(id));
-    }
+  /**
+   * Lấy chi tiết năm học theo ID.
+   */
+  @GetMapping("/{id}")
+  public ResponseEntity<AcademicYearResponse> getAcademicYearById(@PathVariable Integer id) {
+    return ResponseEntity.ok(academicYearService.getAcademicYearById(id));
+  }
 
-    @PostMapping
-    public ResponseEntity<AcademicYearResponse> createAcademicYear(@RequestBody AcademicYearRequest request) {
-        return ResponseEntity.ok(academicYearService.createAcademicYear(request));
-    }
+  /**
+   * Tạo năm học mới.
+   */
+  @PostMapping
+  public ResponseEntity<AcademicYearResponse> createAcademicYear(
+      @RequestBody AcademicYearRequest request) {
+    return ResponseEntity.ok(academicYearService.createAcademicYear(request));
+  }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<AcademicYearResponse> updateAcademicYear(
-            @PathVariable Integer id,
-            @RequestBody AcademicYearRequest request) {
-        return ResponseEntity.ok(academicYearService.updateAcademicYear(id, request));
-    }
+  /**
+   * Cập nhật thông tin năm học.
+   */
+  @PutMapping("/{id}")
+  public ResponseEntity<AcademicYearResponse> updateAcademicYear(
+      @PathVariable Integer id, @RequestBody AcademicYearRequest request) {
+    return ResponseEntity.ok(academicYearService.updateAcademicYear(id, request));
+  }
 }

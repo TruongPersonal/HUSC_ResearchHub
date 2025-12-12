@@ -1,14 +1,13 @@
 package vn.edu.husc.researchhub.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user")
@@ -16,182 +15,180 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
+  @Column(nullable = false, unique = true)
+  private String username;
 
-    private String password;
+  private String password;
 
+  @Column(name = "full_name", nullable = false)
+  private String fullName;
 
+  private String email;
 
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
+  @Column(name = "phone_number", length = 20)
+  private String phoneNumber;
 
-    private String email;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private Role role;
 
-    @Column(name = "phone_number", length = 20)
-    private String phoneNumber;
+  private Boolean sex;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+  @Column(name = "born_date")
+  private LocalDate bornDate;
 
-    private Boolean sex;
+  @Column(name = "avatar_url", length = 500)
+  private String avatarUrl;
 
-    @Column(name = "born_date")
-    private LocalDate bornDate;
+  @ManyToOne
+  @JoinColumn(name = "department_id")
+  private Department department;
 
-    @Column(name = "avatar_url", length = 500)
-    private String avatarUrl;
+  private Integer course;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
+  @Column(name = "class_name", length = 50)
+  private String className;
 
-    private Integer course;
+  @Column(name = "academic_degree", length = 50)
+  private String academicDegree;
 
-    @Column(name = "class_name", length = 50)
-    private String className;
+  @CreationTimestamp
+  @Column(name = "created_at", updatable = false)
+  private LocalDateTime createdAt;
 
-    @Column(name = "academic_degree", length = 50)
-    private String academicDegree;
+  @UpdateTimestamp
+  @Column(name = "updated_at")
+  private LocalDateTime updatedAt;
 
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+  public Integer getId() {
+    return id;
+  }
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getFullName() {
+    return fullName;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
+  }
 
-    public String getFullName() {
-        return fullName;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+  public Role getRole() {
+    return role;
+  }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+  public void setRole(Role role) {
+    this.role = role;
+  }
 
-    public Role getRole() {
-        return role;
-    }
+  public Boolean getSex() {
+    return sex;
+  }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+  public void setSex(Boolean sex) {
+    this.sex = sex;
+  }
 
-    public Boolean getSex() {
-        return sex;
-    }
+  public LocalDate getBornDate() {
+    return bornDate;
+  }
 
-    public void setSex(Boolean sex) {
-        this.sex = sex;
-    }
+  public void setBornDate(LocalDate bornDate) {
+    this.bornDate = bornDate;
+  }
 
-    public LocalDate getBornDate() {
-        return bornDate;
-    }
+  public String getAvatarUrl() {
+    return avatarUrl;
+  }
 
-    public void setBornDate(LocalDate bornDate) {
-        this.bornDate = bornDate;
-    }
+  public void setAvatarUrl(String avatarUrl) {
+    this.avatarUrl = avatarUrl;
+  }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
+  public Department getDepartment() {
+    return department;
+  }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
+  public void setDepartment(Department department) {
+    this.department = department;
+  }
 
-    public Department getDepartment() {
-        return department;
-    }
+  public Integer getCourse() {
+    return course;
+  }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
+  public void setCourse(Integer course) {
+    this.course = course;
+  }
 
-    public Integer getCourse() {
-        return course;
-    }
+  public String getClassName() {
+    return className;
+  }
 
-    public void setCourse(Integer course) {
-        this.course = course;
-    }
+  public void setClassName(String className) {
+    this.className = className;
+  }
 
-    public String getClassName() {
-        return className;
-    }
+  public String getAcademicDegree() {
+    return academicDegree;
+  }
 
-    public void setClassName(String className) {
-        this.className = className;
-    }
+  public void setAcademicDegree(String academicDegree) {
+    this.academicDegree = academicDegree;
+  }
 
-    public String getAcademicDegree() {
-        return academicDegree;
-    }
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
 
-    public void setAcademicDegree(String academicDegree) {
-        this.academicDegree = academicDegree;
-    }
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 }
