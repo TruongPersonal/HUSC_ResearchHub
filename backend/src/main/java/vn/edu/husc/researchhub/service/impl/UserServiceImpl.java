@@ -339,8 +339,7 @@ public class UserServiceImpl implements UserService {
     if (Boolean.TRUE.equals(request.getDeleteAvatar())) {
       user.setAvatarUrl(null);
     } else if (avatar != null && !avatar.isEmpty()) {
-      String fileName = fileService.storeFile(avatar, "avatars");
-      String fileUrl = "/uploads/avatars/" + fileName;
+      String fileUrl = fileService.storeFile(avatar, "avatars");
       user.setAvatarUrl(fileUrl);
     }
 
@@ -356,10 +355,7 @@ public class UserServiceImpl implements UserService {
             .findByUsername(username)
             .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng: " + username));
 
-    String fileName = fileService.storeFile(file, "avatars");
-
-    // Assuming we serve files from /uploads/avatars/
-    String fileUrl = "/uploads/avatars/" + fileName;
+    String fileUrl = fileService.storeFile(file, "avatars");
 
     user.setAvatarUrl(fileUrl);
     userRepository.save(user);

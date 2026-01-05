@@ -91,6 +91,8 @@ export default function TeacherProfilePage() {
         if (avatarUrl && avatarUrl.startsWith("/uploads")) {
           avatarUrl = `${process.env.NEXT_PUBLIC_API_URL}${avatarUrl}`;
         }
+        // If http, keep as is
+
 
         // Parse academicDegree (e.g. "PGS. TS." -> Rank: "PGS", Degree: "TS")
         let rank = "";

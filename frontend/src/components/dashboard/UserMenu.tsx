@@ -65,8 +65,11 @@ export function UserMenu() {
         const role = decoded.role.replace("ROLE_", "") as UserRole;
 
         let avatarUrl = profile.avatarUrl;
-        if (avatarUrl && avatarUrl.startsWith("/uploads")) {
-          avatarUrl = `${process.env.NEXT_PUBLIC_API_URL}${avatarUrl}`;
+        if (avatarUrl) {
+          if (avatarUrl.startsWith("/uploads")) {
+            avatarUrl = `${process.env.NEXT_PUBLIC_API_URL}${avatarUrl}`;
+          }
+          // if starts with http, leave as is
         }
 
         setUser({

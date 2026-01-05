@@ -35,6 +35,7 @@ public class ApprovedTopicServiceImpl implements ApprovedTopicService {
   private final ApprovedTopicDocumentRepository approvedTopicDocumentRepository;
   private final TopicMemberRepository topicMemberRepository;
   private final vn.edu.husc.researchhub.repository.YearSessionRepository yearSessionRepository;
+  private final vn.edu.husc.researchhub.service.FileService fileService;
 
   @Override
   public PageResponse<ApprovedTopicResponse> getAllApprovedTopics(
@@ -152,34 +153,15 @@ public class ApprovedTopicServiceImpl implements ApprovedTopicService {
     }
 
     // 3. Save New File
-    String fileName = file.getOriginalFilename();
-
     // Use ID for folder name
     String folderName = String.valueOf(approvedTopic.getId());
-    // Sanitize - though ID is integer so it's safe.
-    // folderName = folderName.replaceAll("[^a-zA-Z0-9.-]", "_");
-
-    String uploadDir = "uploads/documents/" + folderName + "/";
-    java.io.File directory = new java.io.File(uploadDir);
-    if (!directory.exists()) {
-      directory.mkdirs();
-    }
-
-    String filePath = uploadDir + fileName;
-    try {
-      file.transferTo(new java.io.File(directory.getAbsolutePath() + "/" + fileName));
-    } catch (java.io.IOException e) {
-      throw new RuntimeException("Không thể lưu tệp tin", e);
-    }
+    String fileUrl = fileService.storeFile(file, "documents/" + folderName);
 
     // 4. Update/Create Entity
     document.setApprovedTopic(approvedTopic);
     document.setDocumentType(type);
-    document.setFileUrl("/" + filePath);
-    // Only update summary if provided (or if new)?
-    // User logic: "Nộp được 1 loại 1 lần". If uploading, likely want to set summary too.
-    // If summary is null in request, should we clear it?
-    // Let's set it to whatever is passed, as upload dialog sends it.
+    document.setFileUrl(fileUrl);
+    // Only update summary if provided
     document.setScientificArticleSummary(summary);
 
     document = approvedTopicDocumentRepository.save(document);

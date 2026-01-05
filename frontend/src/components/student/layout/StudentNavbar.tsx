@@ -49,8 +49,10 @@ function MobileMenuContent({ pathname, onClose }: { pathname: string; onClose: (
   };
 
   const getAvatarUrl = (url?: string) => {
-    if (url && url.startsWith("/uploads")) return `${process.env.NEXT_PUBLIC_API_URL}${url}`;
-    return url || "/images/avatars/student.png";
+    if (!url) return "/images/avatars/student.png";
+    if (url.startsWith("http")) return url;
+    if (url.startsWith("/uploads")) return `${process.env.NEXT_PUBLIC_API_URL}${url}`;
+    return url;
   };
 
   return (
