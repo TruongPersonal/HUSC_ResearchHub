@@ -130,7 +130,7 @@ export function ApprovedTopicReportDialog({
                           className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
                           onClick={() =>
                             window.open(
-                              `http://localhost:8080${doc.fileUrl}`,
+                              `${process.env.NEXT_PUBLIC_API_URL}${doc.fileUrl}`,
                               "_blank",
                             )
                           }

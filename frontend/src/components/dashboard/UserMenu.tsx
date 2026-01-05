@@ -66,7 +66,7 @@ export function UserMenu() {
 
         let avatarUrl = profile.avatarUrl;
         if (avatarUrl && avatarUrl.startsWith("/uploads")) {
-          avatarUrl = `http://localhost:8080${avatarUrl}`;
+          avatarUrl = `${process.env.NEXT_PUBLIC_API_URL}${avatarUrl}`;
         }
 
         setUser({

@@ -570,7 +570,7 @@ export default function TopicDetailPage() {
                           <div className="flex flex-col">
                             <div className="flex items-center gap-2">
                               <a
-                                href={`http://localhost:8080${doc.fileUrl}`}
+                                href={`${process.env.NEXT_PUBLIC_API_URL}${doc.fileUrl}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-xs text-blue-600 hover:underline flex items-center gap-1 mt-1 font-medium"

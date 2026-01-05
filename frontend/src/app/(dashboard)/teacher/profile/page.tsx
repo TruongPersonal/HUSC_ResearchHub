@@ -89,7 +89,7 @@ export default function TeacherProfilePage() {
         // Map API data to UI format
         let avatarUrl = user.avatarUrl;
         if (avatarUrl && avatarUrl.startsWith("/uploads")) {
-          avatarUrl = `http://localhost:8080${avatarUrl}`;
+          avatarUrl = `${process.env.NEXT_PUBLIC_API_URL}${avatarUrl}`;
         }
 
         // Parse academicDegree (e.g. "PGS. TS." -> Rank: "PGS", Degree: "TS")
@@ -219,7 +219,7 @@ export default function TeacherProfilePage() {
       // Map updated user to UI format
       let avatarUrl = updatedUser.avatarUrl;
       if (avatarUrl && avatarUrl.startsWith("/uploads")) {
-        avatarUrl = `http://localhost:8080${avatarUrl}`;
+        avatarUrl = `${process.env.NEXT_PUBLIC_API_URL}${avatarUrl}`;
       }
 
       // Re-parse degree for UI update (or just use next values directly to avoid parse lag?)

@@ -77,7 +77,7 @@ export default function StudentProfilePage() {
         // Map API data to UI format
         let avatarUrl = user.avatarUrl;
         if (avatarUrl && avatarUrl.startsWith("/uploads")) {
-          avatarUrl = `http://localhost:8080${avatarUrl}`;
+          avatarUrl = `${process.env.NEXT_PUBLIC_API_URL}${avatarUrl}`;
         }
 
         setData({
@@ -183,7 +183,7 @@ export default function StudentProfilePage() {
       // Map updated user to UI format
       let avatarUrl = updatedUser.avatarUrl;
       if (avatarUrl && avatarUrl.startsWith("/uploads")) {
-        avatarUrl = `http://localhost:8080${avatarUrl}`;
+        avatarUrl = `${process.env.NEXT_PUBLIC_API_URL}${avatarUrl}`;
       }
 
       setData({

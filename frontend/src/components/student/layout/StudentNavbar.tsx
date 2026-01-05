@@ -49,7 +49,7 @@ function MobileMenuContent({ pathname, onClose }: { pathname: string; onClose: (
   };
 
   const getAvatarUrl = (url?: string) => {
-    if (url && url.startsWith("/uploads")) return `http://localhost:8080${url}`;
+    if (url && url.startsWith("/uploads")) return `${process.env.NEXT_PUBLIC_API_URL}${url}`;
     return url || "/images/avatars/student.png";
   };
 
