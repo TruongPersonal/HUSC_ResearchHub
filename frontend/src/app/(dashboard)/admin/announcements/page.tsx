@@ -133,13 +133,7 @@ export default function AnnouncementsPage() {
       toast.error("Có lỗi xảy ra khi lưu dữ liệu");
     }
   };
-
-  if (yearLoading) {
-    return (
-      <div className="flex items-center justify-center h-full">Đang tải...</div>
-    );
-  }
-
+  
   return (
     <div className="h-full flex-1 flex-col space-y-8 md:flex">
       <div className="flex items-center justify-between space-y-2">
