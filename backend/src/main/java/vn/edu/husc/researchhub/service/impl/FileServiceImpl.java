@@ -35,6 +35,9 @@ public class FileServiceImpl implements FileService {
         this.s3Client = S3Client.builder()
                 .endpointOverride(URI.create(endpoint))
                 .region(Region.of(region))
+                .serviceConfiguration(software.amazon.awssdk.services.s3.S3Configuration.builder()
+                        .pathStyleAccessEnabled(true)
+                        .build())
                 .credentialsProvider(StaticCredentialsProvider.create(
                         AwsBasicCredentials.create(accessKey, secretKey)))
                 .build();
