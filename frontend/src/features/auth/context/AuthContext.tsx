@@ -31,6 +31,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setLoading(false);
       }
     };
+
+    // Auto-restore cookie if missing but localStorage has token
+    const token = localStorage.getItem("token");
+    if (token && !document.cookie.includes("token=")) {
+      document.cookie = `token=${token}; path=/; max-age=86400; SameSite=Lax; Secure`;
+    }
+
     initAuth();
   }, []);
 

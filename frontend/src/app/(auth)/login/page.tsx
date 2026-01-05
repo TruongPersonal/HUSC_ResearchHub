@@ -64,7 +64,7 @@ export default function LoginPage() {
       const { accessToken } = response.data;
       localStorage.setItem("token", accessToken);
       // Set cookie for middleware
-      document.cookie = `token=${accessToken}; path=/; max-age=86400; SameSite=Strict`;
+      document.cookie = `token=${accessToken}; path=/; max-age=86400; SameSite=Lax; Secure`;
 
       // Decode token to check role
       const decoded = jwtDecode<{ role: string }>(accessToken);
