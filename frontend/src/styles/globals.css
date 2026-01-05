@@ -113,6 +113,12 @@
 }
 
 @layer base {
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
   * {
     @apply border-border outline-ring/50;
   }

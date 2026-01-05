@@ -158,7 +158,8 @@ const assistantItems = [
  * Sidebar điều hướng chính.
  * Hiển thị menu dựa trên vai trò người dùng (Admin, Student, Teacher, Assistant).
  */
-export function Sidebar() {
+
+export function Sidebar({ className, onClose }: { className?: string; onClose?: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const [role, setRole] = useState<string | null>(null);
@@ -191,10 +192,11 @@ export function Sidebar() {
     localStorage.removeItem("token");
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     router.push("/login");
+    if (onClose) onClose();
   };
 
   return (
-    <div className="flex h-full w-64 flex-col border-r bg-white">
+    <div className={cn("flex h-full w-64 flex-col border-r bg-white", className)}>
       <div className="flex h-16 items-center border-b px-6 gap-3">
         <Image
           src="/images/icons/logo.png"
@@ -223,6 +225,7 @@ export function Sidebar() {
               <Link
                 key={index}
                 href={item.href}
+                onClick={onClose}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                   isActive

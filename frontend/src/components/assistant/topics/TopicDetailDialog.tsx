@@ -68,7 +68,7 @@ export function TopicDetailDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-[calc(100%-2rem)] md:max-w-2xl lg:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Chi tiết đề tài</DialogTitle>
         </DialogHeader>
@@ -207,12 +207,12 @@ export function TopicDetailDialog({
                 }
               />
             </Field>
-            <DialogFooter>
+            <div className="flex justify-end gap-2 mt-4">
               <Button variant="outline" onClick={() => setEditMode(false)}>
                 Hủy
               </Button>
               <Button onClick={handleSave}>Lưu thay đổi</Button>
-            </DialogFooter>
+            </div>
           </div>
         )}
       </DialogContent>

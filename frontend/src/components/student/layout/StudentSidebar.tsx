@@ -40,6 +40,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useAcademicYear } from "@/contexts/AcademicYearContext";
+import { AcademicYearSelector } from "@/components/shared/AcademicYearSelector";
 
 // ... (imports)
 
@@ -63,24 +64,7 @@ export function StudentSidebar() {
     <div className="w-64 flex flex-col h-full py-6 pl-4">
       {/* Year Selector */}
       <div className="mb-8 pr-4">
-        <Select
-          value={selectedYear?.id.toString()}
-          onValueChange={(value) => {
-            const year = years.find((y) => y.id.toString() === value);
-            if (year) setSelectedYear(year);
-          }}
-        >
-          <SelectTrigger className="w-full bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-3xl backdrop-saturate-150 rounded-xl px-4 py-6 shadow-[0_8px_32px_0_rgba(31,38,135,0.1)] border-white/40 ring-1 ring-white/40 text-sm font-semibold text-gray-700 hover:bg-white/40 transition-colors border-0 focus:ring-white/60">
-            <SelectValue placeholder="Chọn năm học" />
-          </SelectTrigger>
-          <SelectContent>
-            {years.map((year) => (
-              <SelectItem key={year.id} value={year.id.toString()}>
-                {year.year}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <AcademicYearSelector triggerClassName="bg-gradient-to-b from-white/60 to-white/30 border-white/40 ring-1 ring-white/40 py-6 shadow-[0_8px_32px_0_rgba(31,38,135,0.1)]" />
       </div>
 
       {/* Menu Container with Glass Effect */}

@@ -32,12 +32,12 @@ export function DashboardLayoutWrapper({
         {/* min-h-screen ensures this section takes full viewport height, pushing footer below fold */}
         <div className="flex flex-1 pt-28 min-h-screen">
           {/* Sidebar - Fixed Left Edge */}
-          <aside className="hidden lg:block w-64 shrink-0 sticky top-28 h-[calc(100vh-7rem)]">
+          <aside className="hidden xl:block w-64 shrink-0 sticky top-28 h-[calc(100vh-7rem)]">
             <StudentSidebar />
           </aside>
 
           {/* Page Content */}
-          <main className="flex-1 min-w-0 pb-12 pt-8 px-6 container mx-auto">
+          <main className="flex-1 min-w-0 pb-12 pt-8 px-4 md:px-6 container mx-auto">
             {children}
           </main>
         </div>
@@ -57,12 +57,12 @@ export function DashboardLayoutWrapper({
         {/* Main Layout: Sidebar (Left Edge) + Content */}
         <div className="flex flex-1 pt-28 min-h-screen">
           {/* Sidebar - Fixed Left Edge */}
-          <aside className="hidden lg:block w-64 shrink-0 sticky top-28 h-[calc(100vh-7rem)]">
+          <aside className="hidden xl:block w-64 shrink-0 sticky top-28 h-[calc(100vh-7rem)]">
             <TeacherSidebar />
           </aside>
 
           {/* Page Content */}
-          <main className="flex-1 min-w-0 pb-12 pt-8 px-6 container mx-auto">
+          <main className="flex-1 min-w-0 pb-12 pt-8 px-4 md:px-6 container mx-auto">
             {children}
           </main>
         </div>
@@ -76,10 +76,10 @@ export function DashboardLayoutWrapper({
   // Default Layout for Admin/Assistant/Teacher
   return (
     <div className="flex h-screen bg-gray-50">
-      <Sidebar />
+      <Sidebar className="hidden md:flex" />
       <div className="flex flex-1 flex-col overflow-hidden">
         <Navbar />
-        <main className="flex-1 overflow-y-auto p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
       </div>
     </div>
   );

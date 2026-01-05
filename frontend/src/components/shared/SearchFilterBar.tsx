@@ -42,7 +42,7 @@ export function SearchFilterBar({
   rightContent,
 }: SearchFilterBarProps) {
   return (
-    <div className="flex flex-col gap-4 md:flex-row md:items-center bg-white p-4 rounded-lg border shadow-sm">
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-center bg-white p-4 rounded-lg border shadow-sm">
       <div className="relative flex-1 max-w-sm">
         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
         <Input
@@ -56,7 +56,7 @@ export function SearchFilterBar({
       {rightContent}
 
       {filters.length > 0 && (
-        <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
+        <div className="flex flex-col lg:flex-row gap-2 w-full lg:w-auto">
           {filters.map((filter) => (
             <div
               key={filter.key}
