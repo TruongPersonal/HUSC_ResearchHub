@@ -47,7 +47,7 @@ function RoleBadge({ role }: { role: UserRole }) {
  */
 export function UserTable({ data, onEdit }: UserTableProps) {
   return (
-    <div className="rounded-md border shadow-sm bg-white">
+    <div className="rounded-md border shadow-sm bg-white overflow-x-auto">
       <Table>
         <TableHeader className="bg-gray-50">
           <TableRow>

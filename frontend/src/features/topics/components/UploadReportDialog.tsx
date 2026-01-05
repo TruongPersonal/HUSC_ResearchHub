@@ -98,7 +98,7 @@ export function UploadReportDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="max-w-[calc(100%-2rem)] sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Nộp {reportType.label}</DialogTitle>
         </DialogHeader>

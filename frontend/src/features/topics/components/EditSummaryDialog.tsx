@@ -61,7 +61,7 @@ export function EditSummaryDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="max-w-[calc(100%-2rem)] sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Chỉnh sửa tóm tắt</DialogTitle>
         </DialogHeader>

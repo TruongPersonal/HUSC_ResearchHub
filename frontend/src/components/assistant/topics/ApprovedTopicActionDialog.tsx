@@ -119,7 +119,7 @@ export function ApprovedTopicActionDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg">
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Thao tác đề tài</DialogTitle>
         </DialogHeader>

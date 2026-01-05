@@ -120,7 +120,7 @@ export function UserProfileDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[420px] rounded-2xl p-6">
+      <DialogContent className="w-full sm:max-w-[420px] rounded-2xl p-6">
         <DialogHeader>
           <DialogTitle className="text-xl">Thông tin tài khoản</DialogTitle>
           <DialogDescription>

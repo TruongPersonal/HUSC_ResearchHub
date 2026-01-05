@@ -162,7 +162,7 @@ export default function Informations<T extends Record<string, any>>({
       <div className="p-8">
         <div className="flex flex-col gap-10">
           {/* Top Section: Avatar & Summary (Stacked & Centered) */}
-          <div className="flex flex-col items-center space-y-6 border-b border-gray-100 pb-10">
+          <div className="flex flex-col items-center space-y-6 border-b border-gray-100 pb-10 pt-12 md:pt-0">
             <div className="relative group">
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl ring-1 ring-gray-100 relative">
                 <Image

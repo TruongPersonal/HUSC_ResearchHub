@@ -42,7 +42,7 @@ export function AnnouncementDetailModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl p-0 overflow-hidden border-none shadow-2xl rounded-2xl [&>button]:hidden">
+      <DialogContent className="max-w-[calc(100%-2rem)] md:max-w-2xl p-0 overflow-hidden border-none shadow-2xl rounded-2xl [&>button]:hidden">
         {/* Decorative Header Background */}
         <div className="h-24 bg-gradient-to-r from-blue-600 to-purple-600 relative">
           <div className="absolute -bottom-8 left-8">
@@ -52,7 +52,7 @@ export function AnnouncementDetailModal({
           </div>
         </div>
 
-        <div className="px-8 pt-12 pb-8">
+        <div className="px-8 pt-12 pb-8 max-h-[60vh] overflow-y-auto">
           <DialogHeader className="space-y-4">
             <div className="flex items-center gap-3 text-sm text-gray-500">
               <span className="flex items-center gap-1">

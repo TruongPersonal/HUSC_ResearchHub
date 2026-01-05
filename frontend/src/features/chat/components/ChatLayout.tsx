@@ -224,24 +224,24 @@ export function ChatLayout() {
 
             {/* Content Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-                <div className="flex justify-between items-center">
-                    <TabsList className="bg-gray-100/50 p-1 rounded-lg inline-flex h-auto border border-gray-200/50">
-                        <TabsTrigger value="inbox" className="px-4 py-2 rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm font-medium transition-all gap-2 text-sm">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <TabsList className="bg-gray-100/50 p-1 rounded-lg inline-flex h-auto border border-gray-200/50 w-full md:w-auto">
+                        <TabsTrigger value="inbox" className="flex-1 md:flex-none px-4 py-2 rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm font-medium transition-all gap-2 text-sm">
                             <Inbox className="w-4 h-4" /> Tin nhắn đến
                         </TabsTrigger>
-                        <TabsTrigger value="sent" className="px-4 py-2 rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm font-medium transition-all gap-2 text-sm">
+                        <TabsTrigger value="sent" className="flex-1 md:flex-none px-4 py-2 rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm font-medium transition-all gap-2 text-sm">
                             <Send className="w-4 h-4" /> Tin nhắn đã gửi
                         </TabsTrigger>
                     </TabsList>
-                    <div className="relative">
+                    <div className="relative w-full md:w-auto">
                         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
-                        <Input placeholder="Tìm kiếm tin nhắn..." className="pl-9 bg-white w-64 border-gray-200 shadow-sm" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+                        <Input placeholder="Tìm kiếm tin nhắn..." className="pl-9 bg-white w-full md:w-64 border-gray-200 shadow-sm" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
                     </div>
                 </div>
 
                 {/* Message Detail Dialog */}
                 <Dialog open={!!selectedMessage} onOpenChange={(open) => !open && setSelectedMessage(null)}>
-                    <DialogContent className="max-w-2xl">
+                    <DialogContent className="max-w-[calc(100%-2rem)] md:max-w-2xl">
                         <DialogHeader><DialogTitle>Chi tiết tin nhắn</DialogTitle></DialogHeader>
                         {selectedMessage && (
                             <div className="space-y-4">

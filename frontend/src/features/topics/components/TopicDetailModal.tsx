@@ -35,7 +35,7 @@ export function TopicDetailModal({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl p-0 overflow-hidden border-none shadow-2xl [&>button]:hidden">
+      <DialogContent className="max-w-[calc(100%-2rem)] md:max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-y-auto border-none shadow-2xl p-0 [&>button]:hidden">
         {/* Header with Gradient */}
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
           <div className="flex justify-between items-start gap-4">

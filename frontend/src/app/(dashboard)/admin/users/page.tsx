@@ -165,8 +165,8 @@ export default function UsersPage() {
   };
 
   return (
-    <div className="h-full flex-1 flex-col space-y-8 md:flex">
-      <div className="flex items-center justify-between space-y-2">
+    <div className="flex-1 flex-col space-y-8 md:flex">
+      <div className="flex flex-wrap items-center justify-between gap-4 lg:gap-8">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">
             Quản lý tài khoản
@@ -175,7 +175,7 @@ export default function UsersPage() {
             Danh sách các người dùng hệ thống.
           </p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-wrap items-center gap-2">
           <input
             type="file"
             id="file-upload"
@@ -183,12 +183,12 @@ export default function UsersPage() {
             accept=".xlsx, .xls"
             onChange={handleFileChange}
           />
-          <Button variant="outline" onClick={handleImportClick}>
+          <Button variant="outline" onClick={handleImportClick} size="sm" className="h-9">
             <FileDown className="mr-2 h-4 w-4" />
             Import Excel
           </Button>
-          <Button onClick={handleCreate}>
-            <Plus className="mr-2 h-4 w-4" /> Thêm người dùng
+          <Button onClick={handleCreate} size="sm" className="h-9">
+            <Plus className="mr-2 h-4 w-4" /> Thêm mới
           </Button>
         </div>
       </div>
