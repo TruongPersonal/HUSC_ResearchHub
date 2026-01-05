@@ -56,6 +56,12 @@ public class FileServiceImpl implements FileService {
         // Construct object key (path in bucket)
         String key = (subDir != null && !subDir.isEmpty()) ? subDir + "/" + fileName : fileName;
 
+        System.out.println("--- DEBUG S3 UPLOAD ---");
+        System.out.println("Target Bucket: " + bucketName);
+        System.out.println("Endpoint: " + endpoint);
+        System.out.println("Key: " + key);
+        System.out.println("-----------------------");
+
         try {
             PutObjectRequest putOb = PutObjectRequest.builder()
                     .bucket(bucketName)
