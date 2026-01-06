@@ -2,32 +2,55 @@ package vn.edu.husc.researchhub.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import vn.edu.husc.researchhub.service.EmailService;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
-  private final JavaMailSender emailSender;
+  @Value("${brevo.api.key}")
+  private String apiKey;
 
-  @Value("${spring.mail.username}")
-  private String fromEmail;
+  @Value("${brevo.sender.email}")
+  private String senderEmail;
+
+  @Value("${brevo.sender.name}")
+  private String senderName;
+
+  private final RestTemplate restTemplate = new RestTemplate();
+  private static final String BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 
   @Override
   public void sendSimpleMessage(String to, String subject, String text) {
     try {
-      SimpleMailMessage message = new SimpleMailMessage();
-      message.setFrom(fromEmail);
-      message.setTo(to);
-      message.setSubject(subject);
-      message.setText(text);
-      emailSender.send(message);
+      HttpHeaders headers = new HttpHeaders();
+      headers.setContentType(MediaType.APPLICATION_JSON);
+      headers.set("api-key", apiKey);
+
+      Map<String, Object> body = new HashMap<>();
+      body.put("sender", Map.of("name", senderName, "email", senderEmail));
+      body.put("to", Collections.singletonList(Map.of("email", to)));
+      body.put("subject", subject);
+      body.put("textContent", text); // Use textContent for plain text
+
+      HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
+
+      restTemplate.postForEntity(BREVO_API_URL, request, String.class);
+      System.out.println("Email sent successfully to " + to);
+
     } catch (Exception e) {
       System.err.println("Failed to send email to " + to + ": " + e.getMessage());
-      // Don't throw exception to avoid breaking the main flow if email fails
+      e.printStackTrace();
     }
   }
 
