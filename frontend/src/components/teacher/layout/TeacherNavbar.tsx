@@ -185,7 +185,7 @@ export function TeacherNavbar() {
           href="/teacher"
           className="flex items-center hover:opacity-80 transition-opacity"
         >
-          <span className="xl:hidden font-bold text-lg bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">HUSC Research</span>
+          <span className="xl:hidden font-bold text-lg bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">HUSC ResearchHub</span>
           <Image
             src="/images/icons/logo.png"
             alt="ResearchHub Logo"
