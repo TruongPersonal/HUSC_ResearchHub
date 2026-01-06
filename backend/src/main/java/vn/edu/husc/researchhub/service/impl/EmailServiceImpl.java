@@ -45,9 +45,8 @@ public class EmailServiceImpl implements EmailService {
 
       HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
 
-      org.springframework.http.ResponseEntity<String> response = restTemplate.postForEntity(BREVO_API_URL, request, String.class);
-      System.out.println("Brevo Response Status: " + response.getStatusCode());
-      System.out.println("Brevo Response Body: " + response.getBody());
+      restTemplate.postForEntity(BREVO_API_URL, request, String.class);
+      System.out.println("Email sent successfully to " + to);
 
     } catch (Exception e) {
       System.err.println("Failed to send email to " + to + ": " + e.getMessage());
