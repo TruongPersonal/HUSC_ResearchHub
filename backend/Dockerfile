@@ -16,4 +16,4 @@ EXPOSE 8080
 
 # Environment variables should be injected by Render
 # ENTRYPOINT
-ENTRYPOINT ["java", "-Djava.net.preferIPv4Stack=true", "-Djava.net.preferIPv4Addresses=true", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75.0", "-jar", "app.jar"]
