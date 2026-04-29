@@ -33,5 +33,3 @@
 
 - Dự án này mang tính học thuật, phục vụ việc Nghiên cứu Khoa học tại HUSC.
 - Chúng em cảm ơn thầy TS. Nguyễn Văn Trung - CNTT, HUSC rất nhiều vì đã giúp đỡ bọn em trong suốt quá trình hoàn thành bài nghiên cứu!
-
----
